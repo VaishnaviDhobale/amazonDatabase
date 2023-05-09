@@ -10,7 +10,7 @@ userRoute.get("/", async (req, res) => {
     const data = await UserModel.find();
     res.status(200).send(data);
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send({err});
   }
 });
 
@@ -24,7 +24,7 @@ userRoute.post("/addUser", (req, res) => {
       res.status(200).send({ msg: "User Added Successfully!!" });
     });
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send({err});
   }
 });
 
@@ -38,13 +38,13 @@ userRoute.post("/login", async (req, res) => {
       if (pass) {
         console.log(user)
         const token = jwt.sign({authorId : user[0]._id}, "EZ")
-        res.status(200).send({ msg: "Login Successfull!!", token});
+        res.status(200).send({ msg: "Login Successfull!!", token,name : user[0].name});
       } else {
         res.status(200).send({ err: "Wrong Details" });
       }
     });
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send({err});
   }
 });
 
