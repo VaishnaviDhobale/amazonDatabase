@@ -1,8 +1,8 @@
 
 
 const express = require("express");
-const cors = require("cors");
 const connection = require("./config/db");
+const cors = require("cors")
 const { adminRoute } = require("./routes/adminAuth.routes");
 const { userRoute } = require("./routes/userAuth.routes");
 const { adminProductRoute } = require("./routes/adminProducts.routes");
@@ -12,8 +12,9 @@ const { orderRouter } = require("./routes/order.routes");
 require ("dotenv").config();
 
 const app = express();
-app.use(cors());
 app.use(express.json());
+
+app.use(cors())
 app.use("/admin",adminRoute);
 app.use("/user",userRoute);
 
